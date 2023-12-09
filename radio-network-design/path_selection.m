@@ -135,4 +135,3 @@ campos(v,60,5);     % Latitude and longitude in degrees
 
 % Play the scenario.
 play(sc);
-
