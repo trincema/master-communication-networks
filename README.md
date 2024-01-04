@@ -1,6 +1,6 @@
 # Master - Communication Networks
 Semester I
-- [x] (Optional 1) Radio Network Design [5 credits D] Grade: 10/10
+- [x] <span style="color: green;">&#9745;</span> (Optional 1) Radio Network Design [5 credits D] Grade: 10/10
 - [x] Antennas and Wave Propagation [5 credits E]
 - [x] Advanced Topics in Signal Processing [5 credits E]
 - [x] Selected Topics in Communication Engineering [5 credits E]
