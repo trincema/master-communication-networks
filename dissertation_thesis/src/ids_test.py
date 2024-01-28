@@ -3,7 +3,18 @@ import pandas as pd
 import numpy as np 
 import matplotlib.pyplot as plt 
 import seaborn as sns 
-import time 
+import time
+# Importing libraries and splitting the dataset 
+from sklearn.model_selection import train_test_split 
+from sklearn.preprocessing import MinMaxScaler
+from sklearn.naive_bayes import GaussianNB 
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.metrics import accuracy_score
+from sklearn.metrics import confusion_matrix
+# Standard scientific Python imports
+import matplotlib.pyplot as plt
+# Import datasets, classifiers and performance metrics
+from sklearn import datasets, metrics, svm
 
 # Step 1 – Data Preprocessing:
 
@@ -173,10 +184,6 @@ df.drop('service', axis = 1, inplace = True)
 
 # Step 2 – Modelling
 
-# Importing libraries and splitting the dataset 
-from sklearn.model_selection import train_test_split 
-from sklearn.preprocessing import MinMaxScaler 
-
 # Splitting the dataset 
 df = df.drop(['target', ], axis = 1) 
 print(df.shape) 
@@ -189,19 +196,14 @@ sc = MinMaxScaler()
 X = sc.fit_transform(X) 
 
 # Split test and train data 
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.33, random_state = 42) 
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.33, random_state = 42)
 print(X_train.shape, X_test.shape) 
 print(y_train.shape, y_test.shape) 
 
 # Apply various machine learning classification algorithms such as Support Vector Machines,
 # Random Forest, Naive Bayes, Decision Tree, Logistic Regression to create different models.
 
-# Python implementation of Gaussian Naive Bayes
- 
-# Gaussian Naive Bayes
-from sklearn.naive_bayes import GaussianNB 
-from sklearn.metrics import accuracy_score 
-
+# Python implementation of Gaussian Naive Bayes Classifier
 # Training
 clfg = GaussianNB() 
 start_time = time.time() 
@@ -218,11 +220,18 @@ print("Testing time: ", end_time-start_time)
 print("Train score for NaiveBayes is:", clfg.score(X_train, y_train)) 
 print("Test score for NaiveBayes is:", clfg.score(X_test, y_test)) 
 
-# Python Implementation of Decision Tree
- 
-# Decision Tree 
-from sklearn.tree import DecisionTreeClassifier 
+# Display Confussion Matrix
+# Create confusion matrix
+conf_matrix = confusion_matrix(y_train, y_test_pred)
+# Plot confusion matrix using seaborn heatmap
+plt.figure(figsize=(8, 6))
+sns.heatmap(conf_matrix, annot=True, fmt='d', cmap='Blues', xticklabels=['Class 0', 'Class 1'], yticklabels=['Class 0', 'Class 1'])
+plt.xlabel('Predicted')
+plt.ylabel('Actual')
+plt.title('Confusion Matrix')
+plt.show()
 
+# Python Implementation of Decision Tree Classifier
 clfd = DecisionTreeClassifier(criterion ="entropy", max_depth = 4) 
 start_time = time.time() 
 clfd.fit(X_train, y_train.values.ravel()) 

@@ -16,7 +16,7 @@ def process_packet(packet):
             print("\nRaw Layer Details:")
             packet[scapy.Raw].show()
             print(type(packet))
-            time.sleep(1000000)
+            # time.sleep(1000000)
 
 network_interface = "Ethernet"
 sniff_packets(network_interface)
