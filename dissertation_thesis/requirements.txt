@@ -3,3 +3,5 @@ seaborn
 scikit-learn
 scipy
 matplotlib
+tensorflow
+joblib

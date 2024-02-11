@@ -1,6 +1,8 @@
 % Map parameters
-viewer = siteviewer;
-viewer.Basemap = "openstreetmap";
+%viewer = siteviewer;
+%viewer.Basemap = "openstreetmap";
+viewer = siteviewer("Basemap","openstreetmap",...
+       "Buildings","manhattan.osm");
 
 % Create Base Station Site in 28 GHz Band
 % Place it on top of the Politehnica Timisoara University

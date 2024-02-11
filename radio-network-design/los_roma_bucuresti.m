@@ -1,18 +1,18 @@
 % Create Base Station Site in 28 GHz Band
-% Place it on top of the Politehnica Timisoara University
+% Place it on top of the Coloseum in Rome
 fq = 28e9; % 28 GHz
-tx = txsite("Name","Politechnic University Timisoara", ...
-    "Latitude", 45.747546009667865, ...
-    "Longitude", 21.226313580839275, ...
+tx = txsite("Name","Colloseum Rome", ...
+    "Latitude", 41.89073481346499, ...
+    "Longitude", 12.492230899998866,...
     "TransmitterPower",1, ...
     "TransmitterFrequency",fq);
 show(tx);
 
 % Create Receiver Sites
 % Create three receiver sites in the area and show the sites on the map
-rx = rxsite("Name","Colloseum Rome", ...
-    "Latitude", 41.89073481346499, ...
-    "Longitude", 12.492230899998866);
+rx = rxsite("Name","Politechnic University Timisoara", ...
+    "Latitude", 45.747546009667865, ...
+    "Longitude", 21.226313580839275);
 show(rx);
 
 % Achieve Line-of-Sight Link Visibility
@@ -22,13 +22,11 @@ show(rx);
 los(tx, rx);
 
 % Adjust antenna heights in order to achieve line-of-sight visibility.
-% Place antennas on structures at receiver sites. Assume 6 m utility poles for Bedford
-% and St. Anselm sites, and 15 m antenna pole at Goffstown Police Department.
-rx.AntennaHeight = 1000;
+rx.AntennaHeight = 1;
 
 % Increase height of antenna at base station until line-of-sight
-% is achieved with the receiver site in UPB
-tx.AntennaHeight = 10000;
+% is achieved with the receiver site in UPT
+tx.AntennaHeight = 50000;
 while ~all(los(tx, rx))
     tx.AntennaHeight = tx.AntennaHeight + 100;
 end

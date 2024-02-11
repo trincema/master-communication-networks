@@ -24,16 +24,16 @@ los(tx, rx);
 % Adjust antenna heights in order to achieve line-of-sight visibility.
 % Place antennas on structures at receiver sites. Assume 6 m utility poles for Bedford
 % and St. Anselm sites, and 15 m antenna pole at Goffstown Police Department.
-rx.AntennaHeight = 100;
+rx.AntennaHeight = 10000;
 
 % Increase height of antenna at base station until line-of-sight
 % is achieved with the receiver site in UPB
-tx.AntennaHeight = 5000;
-while ~all(los(tx, rx))
-    tx.AntennaHeight = tx.AntennaHeight + 100;
-end
+%tx.AntennaHeight = 5000;
+%while ~all(los(tx, rx))
+%    tx.AntennaHeight = tx.AntennaHeight + 100;
+%end
 % Tx antenna height need to be aroun 11.400m so that it can reach LOS
 
 % Display line-of-sight
-los(tx, rx);
-disp("Tx Antenna height required for line-of-sight: " + tx.AntennaHeight + " m");
+%los(tx, rx);
+%disp("Tx Antenna height required for line-of-sight: " + tx.AntennaHeight + " m");

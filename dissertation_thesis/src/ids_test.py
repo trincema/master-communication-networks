@@ -204,34 +204,39 @@ print(y_train.shape, y_test.shape)
 # Random Forest, Naive Bayes, Decision Tree, Logistic Regression to create different models.
 
 # Python implementation of Gaussian Naive Bayes Classifier
+print("=== Gaussian Naive Bayes ===")
 # Training
-clfg = GaussianNB() 
-start_time = time.time() 
-clfg.fit(X_train, y_train.values.ravel()) 
-end_time = time.time() 
-print("Training time: ", end_time-start_time) 
+clfg = GaussianNB()
+start_time = time.time()
+clfg.fit(X_train, y_train.values.ravel())
+end_time = time.time()
+print("Training time: ", end_time-start_time)
 
 # Testing 
 start_time = time.time()
 y_test_pred = clfg.predict(X_train)
 end_time = time.time()
+print("prediction: " + y_test_pred)
 print("Testing time: ", end_time-start_time)
 
-print("Train score for NaiveBayes is:", clfg.score(X_train, y_train)) 
-print("Test score for NaiveBayes is:", clfg.score(X_test, y_test)) 
+print("Train score for NaiveBayes is:", clfg.score(X_train, y_train))
+print("Test score for NaiveBayes is:", clfg.score(X_test, y_test))
 
-# Display Confussion Matrix
-# Create confusion matrix
-conf_matrix = confusion_matrix(y_train, y_test_pred)
-# Plot confusion matrix using seaborn heatmap
-plt.figure(figsize=(8, 6))
-sns.heatmap(conf_matrix, annot=True, fmt='d', cmap='Blues', xticklabels=['Class 0', 'Class 1'], yticklabels=['Class 0', 'Class 1'])
-plt.xlabel('Predicted')
-plt.ylabel('Actual')
-plt.title('Confusion Matrix')
-plt.show()
+
+def confussionMatrix(y_train, y_test_method):
+	# Display Confussion Matrix
+	# Create confusion matrix
+	conf_matrix = confusion_matrix(y_train, y_test_pred)
+	# Plot confusion matrix using seaborn heatmap
+	plt.figure(figsize=(8, 6))
+	sns.heatmap(conf_matrix, annot=True, fmt='d', cmap='Blues', xticklabels=['Class 0', 'Class 1'], yticklabels=['Class 0', 'Class 1'])
+	plt.xlabel('Predicted')
+	plt.ylabel('Actual')
+	plt.title('Confusion Matrix')
+	plt.show()
 
 # Python Implementation of Decision Tree Classifier
+print("=== Decision Tree ===")
 clfd = DecisionTreeClassifier(criterion ="entropy", max_depth = 4) 
 start_time = time.time() 
 clfd.fit(X_train, y_train.values.ravel()) 
@@ -247,7 +252,7 @@ print("Train score for DecisionTree is:", clfd.score(X_train, y_train))
 print("Test score for DecisionTree is:", clfd.score(X_test, y_test)) 
 
 # Python code implementation of Random Forest
-
+print("=== Random Forest ===")
 from sklearn.ensemble import RandomForestClassifier 
 
 clfr = RandomForestClassifier(n_estimators = 30) 
@@ -265,7 +270,7 @@ print("Train score for RandomForest is:", clfr.score(X_train, y_train))
 print("Test score for RandomForest is:", clfr.score(X_test, y_test)) 
 
 # Python implementation of Support Vector Classifier
- 
+print("=== Support Vector ===")
 from sklearn.svm import SVC 
 
 clfs = SVC(gamma = 'scale')
@@ -283,3 +288,38 @@ print("Train score for VectorClassifier is:", clfs.score(X_train, y_train))
 print("Test score for VectorClassifier is:", clfs.score(X_test, y_test)) 
 
 # Python implementation of Logistic Regression
+print("=== Logistic Regression ===")
+from sklearn.linear_model import LogisticRegression
+
+clfl = LogisticRegression(max_iter = 1200000)
+start_time = time.time()
+clfl.fit(X_train, y_train.values.ravel())
+end_time = time.time()
+print("Training time: ", end_time-start_time)
+
+start_time = time.time()
+y_test_pred = clfl.predict(X_train)
+end_time = time.time()
+print("Testing time: ", end_time-start_time)
+
+print("Train score is:", clfl.score(X_train, y_train))
+print("Test score is:", clfl.score(X_test, y_test))
+
+# Python implementation of Gradient Descent
+print("=== Gradient Descent ===")
+from sklearn.ensemble import GradientBoostingClassifier
+
+clfg = GradientBoostingClassifier(random_state = 0)
+start_time = time.time()
+clfg.fit(X_train, y_train.values.ravel())
+end_time = time.time()
+print("Training time: ", end_time-start_time)
+
+start_time = time.time()
+y_test_pred = clfg.predict(X_train)
+end_time = time.time()
+print("Testing time: ", end_time-start_time)
+
+print("Train score is:", clfg.score(X_train, y_train))
+print("Test score is:", clfg.score(X_test, y_test))
+
