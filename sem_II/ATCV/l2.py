@@ -8,7 +8,6 @@ from PIL import Image, ImageTk
 class ImageProcessorApp:
     def __init__(self, root):
         self.N = 32     # 2.a, 3.a
-        self.brightness = 75
 
         self.image = None
         self.root = root
@@ -66,21 +65,23 @@ class ImageProcessorApp:
                 blocks = int(height / self.N)
             print("Square blocks fit horizontally/vertically: " + str(blocks))
             modified_image = None
-            # 5 - Loop diagonally in blocks and change brightness
-            for block in range(0, blocks):
-                x = block * self.N
-                y = block * self.N
-                modified_image = self.modify_brightness(modified_img, x, y, self.N, self.brightness)
-            # Alternatively we can loop horizontally
-            for block in range(0, blocks):
-                x = block * self.N
-                y = 0
-                modified_image = self.modify_brightness(modified_img, x, y, self.N, self.brightness)
-            # Or vertically
-            for block in range(0, blocks):
-                x = 0
-                y = block * self.N
-                modified_image = self.modify_brightness(modified_img, x, y, self.N, self.brightness)
+            # 5 - Loop in blocks and change brightness
+            for row in range(0, blocks):
+                for column in range(0, blocks):
+                    x = row * self.N
+                    y = column * self.N
+                    brightness = 0
+                    if row % 2 == 0:
+                        if column % 2 == 0:
+                            brightness = 75
+                        else:
+                            brightness = 25
+                    else:
+                        if column % 2 == 0:
+                            brightness = 25
+                        else:
+                            brightness = 75
+                    modified_image = self.modify_brightness(modified_img, x, y, self.N, brightness)
 
             # Perform image processing here
             # 3.d, 4 Display processed grayscale image, store it in a new variable
@@ -104,9 +105,9 @@ class ImageProcessorApp:
         Returns:
             Modified image.
         """
-        # Extract the region of interest
+        # 5 - Extract the region of interest
         roi = img[y:y+size, x:x+size]
-        # Change the brightness of the region
+        # 6 - Change the brightness of the region
         roi = cv2.add(roi, brightness_change)
         # Clip the pixel values to the valid range [0, 255]
         roi = np.clip(roi, 0, 255)
