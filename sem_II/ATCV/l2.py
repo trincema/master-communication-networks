@@ -64,7 +64,7 @@ class ImageProcessorApp:
             else:
                 blocks = int(height / self.N)
             print("Square blocks fit horizontally/vertically: " + str(blocks))
-            modified_image = None
+            processed_image = cv2.cvtColor(modified_img, cv2.COLOR_BGR2GRAY)  # Example: Convert to grayscale
             # 5 - Loop in blocks and change brightness
             for row in range(0, blocks):
                 for column in range(0, blocks):
@@ -81,12 +81,11 @@ class ImageProcessorApp:
                             brightness = 25
                         else:
                             brightness = 75
-                    modified_image = self.modify_brightness(modified_img, x, y, self.N, brightness)
+                    processed_image = self.modify_brightness(processed_image, x, y, self.N, brightness)
 
             # Perform image processing here
             # 3.d, 4 Display processed grayscale image, store it in a new variable
             # 4 The processed image will be derived from original image, so no duplication needed in Python
-            processed_image = cv2.cvtColor(modified_image, cv2.COLOR_BGR2GRAY)  # Example: Convert to grayscale
             processed_image = Image.fromarray(processed_image)
             processed_image = ImageTk.PhotoImage(processed_image)
             self.processed_label.configure(image=processed_image)
