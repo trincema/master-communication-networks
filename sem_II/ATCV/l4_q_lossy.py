@@ -107,7 +107,7 @@ class ImageProcessorApp:
                 # Extract a block of NxN pixels from the image
                 block = grayscale_image[row:row+self.N, column:column+self.N]
                 # print(block)
-                cv2.imshow('Block', block)
+                # cv2.imshow('Block', block)
                 # Compute the DCT
                 dct_block = cv2.dct(np.float32(block), cv2.DCT_INVERSE)
                 # Quantization
@@ -122,9 +122,9 @@ class ImageProcessorApp:
                 self.reconstructed_image[row:row+self.N, column:column+self.N] = np.uint8(idct_block)
                 # print(dct_block)
                 # Display the result
-                cv2.imshow('DCTBlock', dct_block)
-                cv2.waitKey(0)
-                cv2.destroyAllWindows()
+                # cv2.imshow('DCTBlock', dct_block)
+                # cv2.waitKey(0)
+                # cv2.destroyAllWindows()
         self.dct_img = np.copy(dct_image)
         return dct_image
 
