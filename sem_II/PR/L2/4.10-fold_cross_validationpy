@@ -1,0 +1,50 @@
+import numpy as np
+import tensorflow as tf
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.model_selection import cross_val_score
+import matplotlib.pyplot as plt
+
+# Load the dataset
+mnist = tf.keras.datasets.mnist
+(train_images, train_labels), (test_images, test_labels) = mnist.load_data()
+
+# Normalize the images to the range [0, 1]
+train_images = train_images / 255.0
+test_images = test_images / 255.0
+
+# Flatten the images
+train_images_flat = train_images.reshape(-1, 28*28)
+test_images_flat = test_images.reshape(-1, 28*28)
+
+# List to store the mean cross-validated accuracy for each value of K
+mean_accuracies = []
+ks = list(range(1, 16))
+
+for k in ks:
+    print("Processing KNC for k=" + str(k) + "...")
+    # Create the KNN model with the current value of K
+    knn = KNeighborsClassifier(n_neighbors=k)
+    
+    # Perform 10-fold cross-validation
+    scores = cross_val_score(knn, train_images_flat, train_labels, cv=10, scoring='accuracy')
+    
+    # Compute the mean accuracy and append to the list
+    mean_accuracies.append(scores.mean())
+
+print("Mean accuracies: " + str(mean_accuracies))
+
+# Plot the mean cross-validated accuracy for different values of K
+plt.figure(figsize=(10, 6))
+plt.plot(ks, mean_accuracies, marker='o')
+plt.title('Classification Accuracy for Different Values of K (10-fold Cross-Validation)')
+plt.xlabel('Value of K')
+plt.ylabel('Mean Classification Accuracy')
+plt.grid(True)
+plt.show()
+
+# Find the best value for K
+best_k_index = np.argmax(mean_accuracies)
+best_k = ks[best_k_index]
+
+# Print the best value for K and its corresponding accuracy
+print(f'The best value for K is {best_k} with a classification accuracy of {mean_accuracies[best_k_index]:.4f}')
