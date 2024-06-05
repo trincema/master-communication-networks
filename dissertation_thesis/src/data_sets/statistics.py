@@ -9,6 +9,8 @@ column_names = ["duration", "protocol_type", "service", "flag", "src_bytes", "ds
 
 # Load the dataset into a pandas DataFrame
 df = pd.read_csv(dataset_path, names=column_names)
+print("col: " + df.columns)
+print(df.iloc[0])
 
 # Plot the distribution of attack categories
 attack_counts = df["attack_type"].value_counts()

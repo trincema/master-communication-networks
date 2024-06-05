@@ -69,7 +69,7 @@ class ConvolutionalNeuralNetworksModel(IntrusionDetectionSystem):
         """
         """
         # Load the saved model back
-        self.cnn_model = load_model("{0}.h5".format(file_name))
+        self.cnn_model = load_model("out/{0}.h5".format(file_name))
 
 dataProcessing = KddCup99DataProcessing()
 dataProcessing.modelling()
